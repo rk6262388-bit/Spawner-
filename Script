@@ -1,149 +1,73 @@
--- =============================================
---  RAYAN KEY SYSTEM + LOADSTRING LOADER
---  Key: 68170246I$6528
---  Get Key Link: https://link-hub.net/1279978/ESEqa7W5xj79
--- =============================================
-
+-- [[ CONFIGURATION ]]
 local CorrectKey = "68170246I$6528"
-local KeyLink    = "https://link-hub.net/1279978/ESEqa7W5xj79"
-
-local ScriptToLoad = [[
+local KeyLink = "https://link-hub.net/1279978/ESEqa7W5xj79"
+local ScriptToLoad = function()
     loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/wTBIrf8gk8gFx1wI/raw", true))()
-]]
+end
 
--- ============== GUI SETUP ==============
-local Players = game:GetService("Players")
-local GuiService = game:GetService("GuiService")
-local UserInputService = game:GetService("UserInputService")
-
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-
+-- [[ GUI CREATION ]]
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "KeySystemRayan"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = playerGui
-
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 340, 0, 260)
-MainFrame.Position = UDim2.new(0.5, -170, 0.5, -130)
-MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-MainFrame.BorderSizePixel = 0
-MainFrame.Parent = ScreenGui
-
-local UICorner = Instance.new("UICorner")
-UICorner.CornerRadius = UDim.new(0, 12)
-UICorner.Parent = MainFrame
-
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, 0, 0, 50)
-Title.BackgroundTransparency = 1
-Title.Text = "KEY SYSTEM"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextScaled = true
-Title.Font = Enum.Font.GothamBold
-Title.Parent = MainFrame
-
-local GetKeyBtn = Instance.new("TextButton")
-GetKeyBtn.Size = UDim2.new(0.85, 0, 0, 50)
-GetKeyBtn.Position = UDim2.new(0.075, 0, 0.28, 0)
-GetKeyBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-GetKeyBtn.Text = "GET KEY"
-GetKeyBtn.TextColor3 = Color3.new(1, 1, 1)
-GetKeyBtn.TextScaled = true
-GetKeyBtn.Font = Enum.Font.GothamBold
-GetKeyBtn.Parent = MainFrame
-
-local GetKeyCorner = Instance.new("UICorner")
-GetKeyCorner.CornerRadius = UDim.new(0, 8)
-GetKeyCorner.Parent = GetKeyBtn
-
-local KeyLabel = Instance.new("TextLabel")
-KeyLabel.Size = UDim2.new(0.85, 0, 0, 20)
-KeyLabel.Position = UDim2.new(0.075, 0, 0.52, 0)
-KeyLabel.BackgroundTransparency = 1
-KeyLabel.Text = "Enter key here:"
-KeyLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
-KeyLabel.TextXAlignment = Enum.TextXAlignment.Left
-KeyLabel.Font = Enum.Font.Gotham
-KeyLabel.TextSize = 14
-KeyLabel.Parent = MainFrame
-
-local KeyBox = Instance.new("TextBox")
-KeyBox.Size = UDim2.new(0.85, 0, 0, 45)
-KeyBox.Position = UDim2.new(0.075, 0, 0.58, 0)
-KeyBox.PlaceholderText = "Paste key here..."
-KeyBox.Text = ""
-KeyBox.TextScaled = true
-KeyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-KeyBox.Font = Enum.Font.Gotham
-KeyBox.Parent = MainFrame
-
-local KeyBoxCorner = Instance.new("UICorner")
-KeyBoxCorner.CornerRadius = UDim.new(0, 8)
-KeyBoxCorner.Parent = KeyBox
-
+local KeyInput = Instance.new("TextBox")
 local SubmitBtn = Instance.new("TextButton")
-SubmitBtn.Size = UDim2.new(0.85, 0, 0, 50)
-SubmitBtn.Position = UDim2.new(0.075, 0, 0.78, 0)
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
-SubmitBtn.Text = "SUBMIT KEY"
-SubmitBtn.TextColor3 = Color3.new(1, 1, 1)
-SubmitBtn.TextScaled = true
-SubmitBtn.Font = Enum.Font.GothamBold
+local GetKeyBtn = Instance.new("TextButton")
+
+-- Parent the GUI
+ScreenGui.Parent = game.CoreGui
+ScreenGui.Name = "KeySystemGUI"
+
+-- Main Frame Styling
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+MainFrame.Size = UDim2.new(0, 250, 0, 150)
+MainFrame.Active = true
+MainFrame.Draggable = true -- Allows user to move the GUI
+
+-- Title
+Title.Parent = MainFrame
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Text = "Key System"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.BackgroundTransparency = 1
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 20
+
+-- TextBox for Key
+KeyInput.Parent = MainFrame
+KeyInput.Position = UDim2.new(0.1, 0, 0.3, 0)
+KeyInput.Size = UDim2.new(0.8, 0, 0, 30)
+KeyInput.PlaceholderText = "Enter Key Here..."
+KeyInput.Text = ""
+
+-- Submit Button Logic
 SubmitBtn.Parent = MainFrame
-
-local SubmitCorner = Instance.new("UICorner")
-SubmitCorner.CornerRadius = UDim.new(0, 8)
-SubmitCorner.Parent = SubmitBtn
-
--- ============== BUTTON FUNCTIONS ==============
-
-GetKeyBtn.MouseButton1Click:Connect(function()
-    GuiService:OpenBrowserWindow(KeyLink)
-    setclipboard(KeyLink)
-    
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Key System";
-        Text = "Link opened in browser + copied to clipboard!\nGo complete the steps there to get your key.";
-        Duration = 6;
-    })
-end)
+SubmitBtn.Position = UDim2.new(0.1, 0, 0.6, 0)
+SubmitBtn.Size = UDim2.new(0.35, 0, 0, 30)
+SubmitBtn.Text = "Submit"
+SubmitBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
 
 SubmitBtn.MouseButton1Click:Connect(function()
-    if KeyBox.Text == CorrectKey then
-        SubmitBtn.Text = "✅ SUCCESS!"
-        SubmitBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 120)
-        
-        wait(0.8)
-        ScreenGui:Destroy()
-        
-        local success, err = pcall(function()
-            loadstring(ScriptToLoad)()
-        end)
-        
-        if not success then
-            warn("[Key System] Script load error: " .. tostring(err))
-        end
+    if KeyInput.Text == CorrectKey then
+        print("Access Granted!")
+        MainFrame:Destroy() -- Close GUI on success
+        ScriptToLoad()    -- Run your loadstring
     else
-        SubmitBtn.Text = "❌ WRONG KEY"
-        SubmitBtn.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
-        
-        wait(1.2)
-        SubmitBtn.Text = "SUBMIT KEY"
-        SubmitBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
+        KeyInput.Text = ""
+        KeyInput.PlaceholderText = "WRONG KEY!"
     end
 end)
 
-KeyBox.FocusLost:Connect(function(enterPressed)
-    if enterPressed then
-        SubmitBtn.MouseButton1Click:Fire()
-    end
-end)
+-- Get Key Button Logic
+GetKeyBtn.Parent = MainFrame
+GetKeyBtn.Position = UDim2.new(0.55, 0, 0.6, 0)
+GetKeyBtn.Size = UDim2.new(0.35, 0, 0, 30)
+GetKeyBtn.Text = "Get Key"
+GetKeyBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 
-UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.Escape then
-        ScreenGui:Destroy()
-    end
+GetKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard(KeyLink) -- Copies link to user's clipboard
+    print("Link copied to clipboard!")
 end)
